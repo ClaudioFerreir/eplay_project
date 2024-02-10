@@ -1,7 +1,21 @@
 import styled from 'styled-components'
 
-export const Container = styled.section`
+import { cores } from '../../styles'
+import { Card } from '../Product/styles'
+
+type Props = {
+  $background: 'black' | 'gray'
+}
+
+export const Container = styled.section<Props>`
   padding: 32px 0;
+  background-color: ${(props) =>
+    props.$background === 'black' ? cores.preta : cores.cinza};
+
+  ${Card} {
+    background-color: ${(props) =>
+      props.$background === 'black' ? cores.cinza : cores.preta};
+  }
 `
 
 export const List = styled.ul`
