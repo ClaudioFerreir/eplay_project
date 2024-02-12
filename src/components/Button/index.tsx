@@ -21,7 +21,7 @@ const Button = ({
     return (
       <ButtonContainer
         type="button"
-        variant={variant}
+        $variant={variant}
         title={title}
         onClick={onClick}
       >
