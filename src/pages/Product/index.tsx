@@ -1,9 +1,10 @@
-import { useParams } from 'react-router-dom'
+/* import { useParams } from 'react-router-dom' */
+import Hero from '../../components/Hero'
 
 const Product = () => {
-  const { id } = useParams()
+  /* const { id } = useParams() */
 
-  return <div>Product {id}</div>
+  return <Hero />
 }
 
 export default Product
