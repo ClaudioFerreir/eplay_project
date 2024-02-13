@@ -1,4 +1,5 @@
 /* import { useParams } from 'react-router-dom' */
+import Gallery from '../../components/Gallery'
 import Hero from '../../components/Hero'
 import Section from '../../components/Section'
 
@@ -29,9 +30,7 @@ const Product = () => (
         jogo.
       </p>
     </Section>
-    <Section title="Galeria" background="black">
-      <div>fotos</div>
-    </Section>
+    <Gallery />
   </>
 )
 
