@@ -1,12 +1,13 @@
 import Section from '../Section'
 
-import { Action, Item, Items } from './styles'
+import { Action, Item, Items, Modal, ModalContent } from './styles'
 
 import spiderImg from '../../assets/images/banner-homem-aranha.png'
 import hogwarts from '../../assets/images/hogwartsLegacy_back.jpg'
 
 import zoom from '../../assets/images/zoom.png'
 import play from '../../assets/images/play.png'
+import fechar from '../../assets/images/fechar.png'
 
 type GalleryItem = {
   type: 'image' | 'video'
@@ -45,24 +46,36 @@ const Gallery = ({ defaultCover, name }: Props) => {
   }
 
   return (
-    <Section title="Galeria" background="black">
-      <Items className="container">
-        {mock.map((media, index) => (
-          <Item key={media.url}>
-            <img
-              src={getMediaCover(media)}
-              alt={`Mídia ${index + 1} de ${name}`}
-            />
-            <Action>
+    <>
+      <Section title="Galeria" background="black">
+        <Items className="container">
+          {mock.map((media, index) => (
+            <Item key={media.url}>
               <img
-                src={getMediaIcon(media)}
-                alt="Clique para maximizar a mídia"
+                src={getMediaCover(media)}
+                alt={`Mídia ${index + 1} de ${name}`}
               />
-            </Action>
-          </Item>
-        ))}
-      </Items>
-    </Section>
+              <Action>
+                <img
+                  src={getMediaIcon(media)}
+                  alt="Clique para maximizar a mídia"
+                />
+              </Action>
+            </Item>
+          ))}
+        </Items>
+      </Section>
+      <Modal>
+        <ModalContent className="container">
+          <header>
+            <h4>{name}</h4>
+            <img src={fechar} alt="Ícone de fechar" />
+          </header>
+          <img src={spiderImg} />
+        </ModalContent>
+        <div className="overlay"></div>
+      </Modal>
+    </>
   )
 }
 
