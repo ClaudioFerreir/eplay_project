@@ -5,38 +5,21 @@ import { GalleryItem } from '../../pages/Home'
 
 import { Action, Item, Items, Modal, ModalContent } from './styles'
 
-import spiderImg from '../../assets/images/banner-homem-aranha.png'
-import hogwarts from '../../assets/images/hogwartsLegacy_back.jpg'
-
 import zoom from '../../assets/images/zoom.png'
 import play from '../../assets/images/play.png'
 import fechar from '../../assets/images/fechar.png'
 
-const mock: GalleryItem[] = [
-  {
-    type: 'image',
-    url: spiderImg
-  },
-  {
-    type: 'image',
-    url: hogwarts
-  },
-  {
-    type: 'video',
-    url: 'https://www.youtube.com/embed/uHGShqcAHlQ?si=suqD63sCslzSIWc8'
-  }
-]
-
 type Props = {
   defaultCover: string
   name: string
+  items: GalleryItem[]
 }
 
 interface ModalState extends GalleryItem {
   isVisible: boolean
 }
 
-const Gallery = ({ defaultCover, name }: Props) => {
+const Gallery = ({ defaultCover, name, items }: Props) => {
   const [modal, setModal] = useState<ModalState>({
     isVisible: false,
     type: 'image',
@@ -65,7 +48,7 @@ const Gallery = ({ defaultCover, name }: Props) => {
     <>
       <Section title="Galeria" background="black">
         <Items className="container">
-          {mock.map((media, index) => (
+          {items.map((media, index) => (
             <Item
               key={media.url}
               onClick={() => {

@@ -5,7 +5,6 @@ import Gallery from '../../components/Gallery'
 import Hero from '../../components/Hero'
 import Section from '../../components/Section'
 
-import residentEvil from '../../assets/images/resident.png'
 import { Game } from '../Home'
 
 const Product = () => {
@@ -25,7 +24,7 @@ const Product = () => {
 
   return (
     <>
-      <Hero />
+      <Hero game={game} />
       <Section title="Sobre o jogo" background="black">
         <p>{game.description}</p>
       </Section>
@@ -41,7 +40,11 @@ const Product = () => {
           {''} {game.details.languages.join(', ')}
         </p>
       </Section>
-      <Gallery name="jogo teste" defaultCover={residentEvil} />
+      <Gallery
+        name={game.name}
+        defaultCover={game.media.cover}
+        items={game.media.gallery}
+      />
     </>
   )
 }
