@@ -62,8 +62,16 @@ export const LinkItem = styled.li`
 export const NavMobile = styled.nav`
   display: none;
 
-  &.is-open {
-    display: block;
+  @media (max-width: ${breakpoints.desktop}) {
+    &.is-open {
+      display: none;
+    }
+  }
+
+  @media (max-width: ${breakpoints.tablet}) {
+    &.is-open {
+      display: block;
+    }
   }
 `
 
