@@ -1,13 +1,13 @@
 import { useDispatch } from 'react-redux'
 
 import { add, open } from '../../store/reducers/cart'
-
-import { Banner, Infos } from './styles'
+import { formataPreco } from '../ProductsList'
 
 import { Game } from '../../pages/Home'
 import Button from '../Button'
-import { formataPreco } from '../ProductsList'
 import Tag from '../Tag'
+
+import { Banner, Infos } from './styles'
 
 type Props = {
   game: Game
