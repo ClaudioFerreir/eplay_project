@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { RootReducer } from '../../store'
 import { close, remove } from '../../store/reducers/cart'
-import { parseToBrl } from '../../utils'
+import { getTotalPrice, parseToBrl } from '../../utils'
 
 import Button from '../Button'
 import Tag from '../Tag'
@@ -18,15 +18,6 @@ const Cart = () => {
 
   const closeCart = () => {
     dispatch(close())
-  }
-
-  const getTotalPrice = () => {
-    return items.reduce((accumulator, currentItem) => {
-      if (currentItem.prices.current) {
-        return (accumulator += currentItem.prices.current)
-      }
-      return 0
-    }, 0)
   }
 
   const removeItem = (id: number) => {
@@ -58,7 +49,7 @@ const Cart = () => {
         </ul>
         <S.Quantity>{items.length} jogo(s) no carrinho</S.Quantity>
         <S.Prices>
-          Total de {parseToBrl(getTotalPrice())}{' '}
+          Total de {parseToBrl(getTotalPrice(items))}{' '}
           <span>Em até 6x sem juros</span>
         </S.Prices>
         <Button
