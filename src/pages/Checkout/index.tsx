@@ -24,7 +24,7 @@ type Installment = {
 
 const Checkout = () => {
   const [payWithCard, setPayWithCard] = useState(false)
-  const [purchase, { data, isSuccess }] = usePurchaseMutation()
+  const [purchase, { data, isSuccess, isLoading }] = usePurchaseMutation()
   const { items } = useSelector((state: RootReducer) => state.cart)
   const [installments, setInstallments] = useState<Installment[]>([])
 
@@ -160,15 +160,15 @@ const Checkout = () => {
 
   return (
     <div className="container">
-      {isSuccess ? (
+      {isSuccess && data ? (
         <Card title="Muito obrigado">
           <>
             <p>
               É com satisfação que informamos que recebemos seu pedido com
               sucesso!
               <br />
-              Abaixo estão os detalhes da sua compra: Número do pedido:{' '}
-              {data.orderId}
+              Abaixo estão os detalhes da sua compra: <br />
+              Número do pedido: {data.orderId}
               <br />
               Forma de pagamento:{' '}
               {payWithCard ? 'Cartão de crédito' : 'Boleto bancário'}
@@ -441,8 +441,9 @@ const Checkout = () => {
             type="submit"
             title="Clique aqui para finalizar a compra"
             onClick={form.handleSubmit}
+            disabled={isLoading}
           >
-            Finalizar compra
+            {isLoading ? 'Finalizando compra...' : 'Finalizar compra'}
           </Button>
         </form>
       )}
