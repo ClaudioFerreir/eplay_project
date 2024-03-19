@@ -1,5 +1,5 @@
 import { Navigate } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
@@ -8,12 +8,14 @@ import InputMask from 'react-input-mask'
 import Button from '../../components/Button'
 import Card from '../../components/Card'
 
-import { usePurchaseMutation } from '../../services/api'
-import { RootReducer } from '../../store'
-import { getTotalPrice, parseToBrl } from '../../utils'
-
 import barCode from '../../assets/images/barcode.png'
 import creditCard from '../../assets/images/credit-card.png'
+
+import { usePurchaseMutation } from '../../services/api'
+import { RootReducer } from '../../store'
+import { clear } from '../../store/reducers/cart'
+
+import { getTotalPrice, parseToBrl } from '../../utils'
 
 import * as S from './styles'
 
@@ -28,6 +30,7 @@ const Checkout = () => {
   const [purchase, { data, isSuccess, isLoading }] = usePurchaseMutation()
   const { items } = useSelector((state: RootReducer) => state.cart)
   const [installments, setInstallments] = useState<Installment[]>([])
+  const dispatch = useDispatch()
 
   const totalPrice = getTotalPrice(items)
 
@@ -153,7 +156,13 @@ const Checkout = () => {
     }
   }, [totalPrice])
 
-  if (items.length === 0) {
+  useEffect(() => {
+    if (isSuccess) {
+      dispatch(clear())
+    }
+  }, [isSuccess, dispatch])
+
+  if (items.length === 0 && !isSuccess) {
     return <Navigate to="/" />
   }
 
